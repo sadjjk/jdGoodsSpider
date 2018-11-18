@@ -1,17 +1,17 @@
-####项目过程
+#### 项目过程
 
-######1.[云服务器配置](https://www.jianshu.com/p/d70b7fe36646)
-######2.[Scrapy爬虫撸代码](https://www.jianshu.com/p/022c88c4a8b3)
-######3.[ProxyPool动态IP代理池](https://www.jianshu.com/p/6c9d712be5e7)
-######4.[云服务器调度](https://www.jianshu.com/p/d51163f71318)   
+###### 1.[云服务器配置](https://www.jianshu.com/p/d70b7fe36646)
+###### 2.[Scrapy爬虫撸代码](https://www.jianshu.com/p/022c88c4a8b3)
+###### 3.[ProxyPool动态IP代理池](https://www.jianshu.com/p/6c9d712be5e7)
+###### 4.[云服务器调度](https://www.jianshu.com/p/d51163f71318)   
 
-####工具
+#### 工具
 - Pycharm
 - Xshell
 - Python 3.6
 - 阿里云Centos 7
 ----
-#####2.Scrapy爬虫代码（京东搜索零食）
+##### 2.Scrapy爬虫代码（京东搜索零食）
 强烈推荐公众号 **皮克啪的铲屎官**
 此部分代码基本都来自他发布的文章[《PeekpaHub》 全栈开发](https://mp.weixin.qq.com/s?__biz=MzI2ODYwNjE5NQ==&mid=2247484173&idx=1&sn=1e75beb71a1fb8dfb18eacf054f85bdc&chksm=eaec4c91dd9bc587dbc4c52602745b3eadf36094f4d1cec8b7ec8bb58a7796e6ea5edd688dcc&mpshare=1&scene=1&srcid=1118glsp0bRvHlfCATZjQzj8&pass_ticket=Lp13fNr4gSxnOFRce%2BtyJ2Jfm62QxBknaCE7tAmCj6PrD30pxVt%2F4sjQOCV6dMTb#rd)
 不仅仅是爬虫 服务器的配置等都是从这里学习的
@@ -22,7 +22,7 @@
 **废话少说 放码过来**
 [京东零食爬虫Github](https://github.com/sadjjk/jdGoodsSpider)
 
-######爬虫主要文件 [jdSpider.py](https://github.com/sadjjk/jdGoodsSpider/blob/master/jdGoodsSpider/spiders/jdSpider.py)
+###### 爬虫主要文件 [jdSpider.py](https://github.com/sadjjk/jdGoodsSpider/blob/master/jdGoodsSpider/spiders/jdSpider.py)
 原作者是使用BeautifulSoup进行html解析 我觉还是用xpath更方便简洁一些  于是改写成了xpath解析 实现的最终效果是一样的 
 还有个地方可以提一下   
 通常都是这么写 在items定义好后一个一个赋值上去![](https://upload-images.jianshu.io/upload_images/3290281-9127a830e28bad98.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)可以改成如下更简洁(这种写法出自崔庆才老师的爬虫教程 也感谢这位老师 )
@@ -34,9 +34,9 @@
         self.logger.debug("Field is Not Defined " + field)
  yield goods
 ```
-######[items.py](https://github.com/sadjjk/jdGoodsSpider/blob/master/jdGoodsSpider/items.py)
+###### [items.py](https://github.com/sadjjk/jdGoodsSpider/blob/master/jdGoodsSpider/items.py)
 这个文件最简单了 定义一下就好了 没什么说的![](https://upload-images.jianshu.io/upload_images/3290281-ca3b123d986ba125.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-######[piplines.py](https://github.com/sadjjk/jdGoodsSpider/blob/master/jdGoodsSpider/pipelines.py)
+###### [piplines.py](https://github.com/sadjjk/jdGoodsSpider/blob/master/jdGoodsSpider/pipelines.py)
 ![](https://upload-images.jianshu.io/upload_images/3290281-37320b2861e0438d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 这里```MONGO_URL```会在settings.py中申明 实际填的就是服务器内网IP 
 一旦填了服务器内网IP后 上传到服务器中运行 是没有问题的 **但在本地是无法跑通测试这个项目的 会报数据库连接不上的错误**
@@ -45,7 +45,7 @@
 - 依然连接服务器中MongoDB 存储到服务器的MongoDB数据库中 不过代码上要做如下修改 添加ssh跳转![](https://upload-images.jianshu.io/upload_images/3290281-91a0feb63da5fdee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 下载三方库sshtunnel 填写公网IP、用户名、密码和内网IP 在打开和关闭数据库的时候 要添加```self.server.start()```和```self.server.stop()```![](https://upload-images.jianshu.io/upload_images/3290281-f844ad4d8f3adcd6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)其他保持不变 这样就可以在本地运行爬虫 并保存在服务器中的MongoDB中
 **注意：若这个项目要上传到服务器中 在服务器中运行 则不用做修改**
-######[middiewares.py](https://github.com/sadjjk/jdGoodsSpider/blob/master/jdGoodsSpider/middlewares.py)
+###### [middiewares.py](https://github.com/sadjjk/jdGoodsSpider/blob/master/jdGoodsSpider/middlewares.py)
 **尤其是在云服务器上运行时  要保证爬虫的健壮稳定**
 中间件需要增加很多异常处理 就要防止爬虫各种意外排取失败
 常用三招：
@@ -78,7 +78,7 @@ agents = [
 
 **爬虫三招全都用上 基本上都能顺利爬取**
 
-######[settings.py](https://github.com/sadjjk/jdGoodsSpider/blob/master/jdGoodsSpider/settings.py)
+###### [settings.py](https://github.com/sadjjk/jdGoodsSpider/blob/master/jdGoodsSpider/settings.py)
 最后一个文件 这个就非常简单
 简单的设置下 
 - 默认遵守robots协议 修改为```False```
@@ -112,10 +112,10 @@ MONGO_URL = 'mongodb://XXX.XX.XXX.XX/'
 #数据库表名
 MONGO_DB = 'JD'
 ```
-######Scrapy代码部分就结束了  
+###### Scrapy代码部分就结束了  
 [Github源码](https://github.com/sadjjk/jdGoodsSpider)
 
-#####下一篇  [ProxyPool动态IP代理池](https://www.jianshu.com/p/6c9d712be5e7)
+##### 下一篇  [ProxyPool动态IP代理池](https://www.jianshu.com/p/6c9d712be5e7)
 
 
 
