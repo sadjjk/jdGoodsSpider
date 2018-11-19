@@ -27,7 +27,7 @@ class JdspiderSpider(scrapy.Spider):
 
 
         for item  in goods_temp_list:
-            goods_id = item.xpath('@data-sku').extract()
+            goods_id = item.xpath('@data-sku').extract_first()
             goods_title = ''.join(item.xpath('.//div[contains(@class,"p-name")]/a/em/text()').extract())
             goods_url = item.xpath('.//div[@class = "p-img"]/a/@href').extract_first()
             goods_url = goods_url if "https://" in goods_url else  "http:" + goods_url

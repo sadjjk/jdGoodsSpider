@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../PeekpaHubSpider/.idea/PeekpaHubSpider.iml" filepath="$PROJECT_DIR$/../../PeekpaHubSpider/.idea/PeekpaHubSpider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../代理/ProxyPool/.idea/ProxyPool.iml" filepath="$PROJECT_DIR$/../../代理/ProxyPool/.idea/ProxyPool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/jdGoodsSpider.iml" filepath="$PROJECT_DIR$/.idea/jdGoodsSpider.iml" />
+    </modules>
+  </component>
+</project>

@@ -65,7 +65,7 @@ class MongoPipeline(object):
     def needToUpdate(self,old_item,new_item):
         if old_item['goods_price'] != new_item['goods_price']:
             old_time = old_item['goods_time']
-            old_price = float(old_item['goods_prcie'])
+            old_price = float(old_item['goods_price'])
             new_price = float(old_item['goods_price'])
 
             minus_price = abs(round((new_price - old_price) , 2 ))
